@@ -3,7 +3,7 @@
 	<div class="col-xs-3">
 
 		<h2>User info</h2>
-		<%= render 'users/profile', user: current_user %>
+		<%= render 'users/profile', user: @user %>
 
 		<h2>New book</h2>
 		<%= render 'books/newform', book: @book %>
@@ -11,8 +11,8 @@
 
 	<div class="col-xs-9">
 
-		<h2>Users</h2>
-		<!--users一覧 -->
+		<h2>Follwer</h2>
+
 		<table class="table">
 			<thead>
 				<tr>
@@ -23,33 +23,17 @@
 			</thead>
 
 			<tbody>
-				<% @users.each do |user| %>
+				<% @user.followers.each do |user| %>
 				<tr>
 					<td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg", size:'50x50') %></td>
 					<td><%= user.name %></td>
 					<td>following: <%= user.followings.count %></td>
 					<td>follower: <%= user.followers.count%></td>
-					<td>
-						<% if current_user != user %>
-							<% if current_user.following?(user) %>
-								<%= form_for(current_user.relationships.find_by(follow_id: user.id), html: { method: :delete }) do |f| %>
-			      					<%= hidden_field_tag :follow_id, user.id %>
-			      					<%= f.submit 'Unfollow' %>
-			      				<% end %>
-							<% else %>
-								<%= form_for(current_user.relationships.build) do |f| %>
-							     	<%= hidden_field_tag :follow_id, user.id %>
-							    	<%= f.submit 'Follow' %>
-							    <% end %>
-							<% end %>
-						<% end %>
-					</td>
 					<td><%= link_to "Show", user_path(user), class: "user_#{user.id}" %></td>
 				</tr>
 				<% end %>
 			</tbody>
 		</table>
-	<!--users一覧 -->
 
 	</div>
 </div>
