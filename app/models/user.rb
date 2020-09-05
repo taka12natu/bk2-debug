@@ -4,6 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  attachment :profile_image, destroy: false
+
+  #バリデーションは該当するモデルに設定する。エラーにする条件を設定できる。
+  validates :name, length: {maximum: 20, minimum: 2}
+  validates :introduction, length: {maximum: 50}
+
   has_many :books
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
@@ -30,10 +36,17 @@ class User < ApplicationRecord
     self.followings.include?(other_user)
   end
 
-  attachment :profile_image, destroy: false
+  def self.search(word,match)
+    if match == "forward_match"
+      @user = User.where(['name LIKE ?', "#{word}%"])
+    elsif match == "backward_match"
+      @user = User.where(['name LIKE ?', "%#{word}"])
+    elsif match == "perfect_match"
+      @user = User.where(['name = ?', "#{word}"])
+    elsif match == "partial_match"
+      @user = User.where(['name LIKE ?', "%#{word}%"])
+    end
+  end
 
-  #バリデーションは該当するモデルに設定する。エラーにする条件を設定できる。
-  validates :name, length: {maximum: 20, minimum: 2}
-  validates :introduction, length: {maximum: 50}
 
 end

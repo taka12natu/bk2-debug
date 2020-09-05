@@ -16,5 +16,6 @@ Rails.application.routes.draw do
 
   root 'home#top'
   get 'home/about'
+  get 'search', to: 'search#search'
 
 end
