@@ -1,0 +1,7 @@
+<%= form_with(model: [book, book_comment]) do |f| %>
+	<%= f.text_area :comment, class: "col-xs-9 set-margin" %>
+	<%= f.submit "送信", class: "btn" %>
+<% end %>
+
+<!-- フォームを空にするための部分テンプレート化
+　　　form_withの場合はデフォルトでremote: trueになっている -->
