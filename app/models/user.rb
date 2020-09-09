@@ -9,6 +9,9 @@ class User < ApplicationRecord
   #バリデーションは該当するモデルに設定する。エラーにする条件を設定できる。
   validates :name, length: {maximum: 20, minimum: 2}
   validates :introduction, length: {maximum: 50}
+  # validates :prefecture_code, presence: true
+  # validates :city, presence: true
+  # validates :street, presence: true
 
   has_many :books
   has_many :favorites, dependent: :destroy
@@ -48,5 +51,10 @@ class User < ApplicationRecord
     end
   end
 
+  def address
+    "%s %s %s"%([self.prefecture_code, self.city, self.street])
+  end
 
+  geocoded_by :address
+  after_validation :geocode
 end

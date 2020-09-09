@@ -70,3 +70,7 @@ gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'pry-rails'
 gem 'pry-byebug'
+gem 'jp_prefecture'
+gem 'geocoder'
+gem 'gon' #jsに変数を渡すためのgem
+gem 'dotenv-rails'
