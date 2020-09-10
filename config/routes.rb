@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :users,only: [:show,:index,:edit,:update] do
   	member do
-  		get 'followings', 'followers'
+  		get 'followings', 'followers', 'chat'
   	end
   end
 
@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   end
 
   resources :relationships, only: [:create,:destroy]
+
+  resources :rooms, only: [:show, :create]
+  resources :chats, only: [:create]
+
 
   root 'home#top'
   get 'home/about'

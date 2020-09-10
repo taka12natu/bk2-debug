@@ -12,16 +12,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    # @user = User.new(configure_permitted_parameters)
-
       if @user.save
         ThanksMailer.thanks_email(@user).deliver_later
       end
   end
-  # private
-  #    def sign_up_params
-  #     params.permit(:postcode, :prefecture_code,)
-  #   end
 
   # GET /resource/edit
   # def edit

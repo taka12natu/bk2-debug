@@ -5,8 +5,11 @@
 		<h2>User info</h2>
 		<%= render 'users/profile', user: @user %>
 
+		<%= render 'users/chat_button', {user: @user, isRoom: @isRoom, room: @room, user_room: @user_room, roomId: @roomId} %>
+
 		<h2>New book</h2>
 		<%= render 'books/newform', book: @book %>
+
 	</div>
 
 	<div class="col-xs-9">
