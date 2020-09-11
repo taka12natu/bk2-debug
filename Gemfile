@@ -74,3 +74,4 @@ gem 'jp_prefecture'
 gem 'geocoder'
 gem 'gon' #jsに変数を渡すためのgem
 gem 'dotenv-rails'
+gem 'whenever', require: false
